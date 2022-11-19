@@ -17,6 +17,7 @@ package net.sf.cglib.transform;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.zip.*;
 import java.util.zip.ZipEntry;
@@ -132,8 +133,8 @@ abstract public class AbstractTransformTask extends AbstractProcessTask {
             log("processing " + file.toURI());
         }
         
-        File tempFile = File.createTempFile(file.getName(), null, new File(file
-                .getAbsoluteFile().getParent()));
+        File tempFile = Files.createTempFile(new File(file
+          .getAbsoluteFile().getParent()).toPath(), file.getName(), null).toFile();
         try{
             
             ZipInputStream zip = new ZipInputStream(new FileInputStream(file));
